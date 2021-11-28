@@ -1,6 +1,7 @@
 "use strict";
 import {
-  loadModels,retrieveModel
+  loadModels,
+  retrieveModel
 } from "./components/3dobjects";
 import {
   createCamera
@@ -23,77 +24,114 @@ import {
 import {
   createControls
 } from './systems/controls.js';
+import {
+  MeshStandardMaterial,
+  Vector3
+} from "three";
+import {
+  Aluminium,
+  glass
+} from "./components/materials";
+import {
+  spray1
+} from "./components/locations";
 
 
 class Studio3d {
 
   constructor(container) {
-  
-    this.currentGlass=null;
-    this.currentCap=null;
-    this.currentCollar=null;
+
+    this.currentGlass = null;
+    this.currentCap = null;
+    this.currentCollar = null;
     this.camera = createCamera();
-   
+    this.container = container
     this.renderer = createRenderer();
     this.scene = createScene();
     container.append(this.renderer.domElement);
     this.controls = createControls(this.camera, this.renderer.domElement);
     this.controls.update()
 
-    const light = createLights();
-    light.intensity=1.7;
-    this.scene.add(light)
-    this.renderer.setSize(container.offsetWidth,container.offsetHeight);
+    const {
+      direct_light,
+      ambient_light
+    } = createLights();
+    direct_light.intensity = 1.9;
+    this.scene.add(direct_light, ambient_light)
+
+    this.renderer.setSize(container.offsetWidth, container.offsetHeight);
 
 
-
-    // const resizer = new Resizer(container, this.camera, this.renderer);
-    // resizer.onResize = () => {
-    //   this.render();
-    // };
-    
   }
 
-  async changeGlass(newGlass){
-    let oldGlass= this.scene.getObjectByName(this.currentGlass.name)
-    console.log(oldGlass)
+  onWindowResize() {
+
+    let w = window.innerWidth/1.22;
+    let h = window.innerHeight/1.001;
+    this.renderer.setSize(w, h);
+    this.render()
+
+  }
+
+  async changeGlass(newGlass) {
+    let oldGlass = this.scene.getObjectByName(this.currentGlass.name)
+
     this.scene.remove(oldGlass)
-    const model =await retrieveModel(newGlass)
-    this.currentGlass= model;
+
+    const model = await retrieveModel(newGlass)
+
+    this.currentGlass = model;
+
+    model.material = glass;
+    // model.material.needsUpdate=true;
+    // model.updateMatrix();
     this.scene.add(model)
     this.render()
 
   }
-  async changeSpray(newCollar){
 
-    if(this.currentCollar){
-      let oldCollar= this.scene.getObjectByName(this.currentCollar.name)
-      console.log(oldCollar)
+  //cambiar el spray con collar
+  async changeSpray(newCollar) {
+
+    if (this.currentCollar) {
+      let oldCollar = this.scene.getObjectByName(this.currentCollar.name)
       this.scene.remove(oldCollar)
     }
- 
-    const model =await retrieveModel(newCollar)
-    this.currentCollar= model;
+
+    const model = await retrieveModel(newCollar)
+
+    let location = spray1.find(elem => elem.name == this.currentGlass.name).data.location
+    let dimensions = spray1.find(elem => elem.name == this.currentGlass.name).data.dimensions
+    model.position.set(location.x, location.y, location.z);
+    console.log(model.position, location);
+    model.material = Aluminium;
+    this.currentCollar = model;
+    this.currentCollar
     this.scene.add(model)
+
     this.render()
-    
-  }
- async changeCap(newCap){
-    let oldCap= this.scene.getObjectByName(this.currentCap.name)
-    console.log(oldCap)
-    this.scene.remove(oldCap)
-    const model =await retrieveModel(newCap)
-    this.currentCap= model;
-    this.scene.add(model)
-    this.render()
+
   }
 
+  //cambiar el tapon
+  async changeCap(newCap) {
+    let oldCap = this.scene.getObjectByName(this.currentCap.name)
+    this.scene.remove(oldCap)
+    const model = await retrieveModel(newCap)
+    this.currentCap = model;
+    this.scene.add(model)
+    this.render()
+  }
 
   async init() {
     await loadModels();
-  const model =await retrieveModel('bruce')
-  this.currentGlass= model;
-  this.scene.add(this.currentGlass);
+    const model = await retrieveModel('bruce')
+    model.name = 'bruce'
+    this.currentGlass = model;
+    this.currentGlass.material = glass;
+
+
+    this.scene.add(this.currentGlass);
 
   }
 

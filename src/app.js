@@ -24,6 +24,10 @@ $('.change-spray').on('click',function(){
 
     studio.changeSpray(model)
 })
+window.addEventListener('resize',function(){
+  
+    studio.onWindowResize();
+}) 
 
 
 

@@ -25,7 +25,6 @@ async function loadModels(model) {
         // loader.loadAsync('../models/cap3.glb'),
     ]);
     models.forEach(model=>{
-
         allModels.push(setupModel(model))
     })
    
@@ -34,6 +33,7 @@ async function loadModels(model) {
 async function retrieveModel(modelName) {
   
   let requested_model = await allModels.find(objectData=>modelName==objectData.name)
+  
     return requested_model;
 
 
