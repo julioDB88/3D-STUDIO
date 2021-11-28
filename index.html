@@ -1,0 +1,87 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-12" id="container"></div>
+              <div class="col-12 col-md-3 col-lg-2">
+               
+                  <div class="studio-setting-row">
+                      <h4>Envase</h4>
+                      <div class="grid grid-col-4">
+                        <button class="btn btn-primary my-2 change-glass " id="bruce">Bruce</button>
+                        <button class="btn btn-primary my-2 change-glass" id="june">June</button>
+                        <button class="btn btn-primary my-2 change-glass"id="dalia">Dalia</button>
+                        <button class="btn btn-primary my-2 change-glass" id="max">Max</button>
+                        <button class="btn btn-primary my-2 change-glass" id="orris">Orris</button>
+                      </div>
+                      <div class="d-flex">
+                          <h4>color</h4>
+                            <input type="color" name="glass-color" id="glass-color">
+                      </div>
+
+                  </div>
+                  <div class="studio-setting-row">
+                    <h4>Spray</h4>
+                    <div class="d-flex">
+                      <button class="btn btn-primary my-2 change-spray" id="spray1">Collar 1</button>
+                      <button class="btn btn-primary my-2 change-spray" id="spray2">Collar 2 </button>
+                    </div>
+                    <div class="d-flex">
+                        <h4>color</h4>
+                          <input type="color" name="glass-color" id="glass-color">
+                    </div>
+                </div>
+                <div class="studio-setting-row">
+                    <h4>Tapon</h4>
+                    <div class="d-flex">
+                      <button class="btn btn-primary change-cap" id="cap-1">Cap 1</button>
+                      <button class="btn btn-primary change-cap" id="cap-2">Cap 2</button>
+                      <button class="btn btn-primary change-cap" id="cap-3">Cap 3</button>
+                    </div>
+                    <div class="d-flex">
+                        <h4>color</h4>
+                          <input type="color" name="glass-color" id="glass-color">
+                    </div>
+                </div>
+              
+              </div>
+              <div class="col-12 col-md-9 col-lg-10">
+                <div id="3dstudio" style="height: 100vh;width: 100%;"></div>
+            </div>
+          </div>
+      </div>
+    
+ 
+      
+    <!-- Optional JavaScript -->
+    <!-- <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker
+                    .register("service-worker.js")
+                    .then((registration) => {
+                        console.log("Service Worker registered: ", registration);
+                    })
+                    .catch((registrationError) => {
+                        console.error("Service Worker registration failed: ", registrationError);
+                    });
+            });
+        }
+    </script> -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
