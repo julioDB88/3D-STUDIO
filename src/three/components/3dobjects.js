@@ -33,20 +33,8 @@ async function loadModels(model) {
 async function retrieveModel(modelName) {
   
   let requested_model = await allModels.find(objectData=>modelName==objectData.name)
-  
     return requested_model;
 
-
-    // let material
-    // let requested_model = await allModels.find(objectData=>modelName==objectData.name)
-    // if(modelName.includes('spray')){
-    //     material= Aluminium
-    // }else{
-    //     material=glass
-    // }
-    // let modelToSend= new Mesh(requested_model.geometry,material) ;
-    // modelToSend.name=modelName;
-    //   return modelToSend;
 }
 
 

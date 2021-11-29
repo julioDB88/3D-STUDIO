@@ -110,11 +110,11 @@ const glassSettings={
         }
       }
 
-const Basic =   new MeshStandardMaterial()
-const glass= new MeshPhysicalMaterial(glassSettings);
-const Aluminium =  new MeshPhysicalMaterial({
+const BasicMaterial =   new MeshStandardMaterial()
+const glassMaterial= new MeshPhysicalMaterial(glassSettings);
+const AluminiumMaterial =  new MeshPhysicalMaterial({
     metalness: 1,
     clearcoat: 1.0,
 });
 
-module.exports={glass,Basic,Aluminium};
+module.exports={glassMaterial,BasicMaterial,AluminiumMaterial};
