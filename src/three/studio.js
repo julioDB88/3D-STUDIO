@@ -31,6 +31,7 @@ BasicMaterial,
 import {
   locations
 } from "./components/locations";
+import { MeshStandardMaterial } from "three";
 
 
 
@@ -194,9 +195,11 @@ class Studio3d {
 
     await loadModels();
     await this.setModels();
+    let mesa= await retrieveModel('table')
+    mesa.material= new MeshStandardMaterial({color:'white'})
     this.controls.addEventListener( 'change', ()=>{this.renderer.render(this.scene, this.camera)} );
     this.setGui()
-    this.scene.add(this.currentGlass, this.currentCap, this.currentSpray);
+    this.scene.add(this.currentGlass, this.currentCap, this.currentSpray,mesa);
 
   }
 

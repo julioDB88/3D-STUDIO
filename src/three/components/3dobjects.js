@@ -12,6 +12,7 @@ let allModels=[];
 async function loadModels(model) {
     const loader = new GLTFLoader();
     const models= await Promise.all([
+        loader.loadAsync('../models/mesa.gltf'),
         loader.loadAsync('../models/bruce.glb'),
         loader.loadAsync('../models/dalia.glb'),
         loader.loadAsync('../models/june.glb'),
@@ -25,6 +26,7 @@ async function loadModels(model) {
         // loader.loadAsync('../models/cap3.glb'),
     ]);
     models.forEach(model=>{
+        console.log(model);
         allModels.push(setupModel(model))
     })
    
