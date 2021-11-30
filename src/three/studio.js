@@ -1,4 +1,5 @@
 "use strict";
+
 import {
   loadModels,
   retrieveModel
@@ -17,6 +18,7 @@ import {
 } from "./systems/renderer.js";
 import {
   createGui,
+  updateGlassColor,
   guiColorControls
 } from "./systems/gui";
 import {
@@ -24,14 +26,14 @@ import {
 } from './systems/controls.js';
 
 import {
-BasicMaterial,
+  BasicMaterial,
   AluminiumMaterial,
-  GlassMaterial
+  GlassMaterial, WoodMaterial, RoomMaterial
 } from "./components/materials";
 import {
   locations
 } from "./components/locations";
-import { MeshStandardMaterial } from "three";
+
 
 
 
@@ -47,10 +49,11 @@ class Studio3d {
     this.container = container
     this.renderer = createRenderer();
     this.scene = createScene();
-    container.appendChild(this.renderer.domElement);
+    this.container.appendChild(this.renderer.domElement);
     this.controls = createControls(this.camera, this.renderer.domElement);
 
     this.gui = createGui()
+  
 
     const {
       direct_light,
@@ -101,6 +104,7 @@ class Studio3d {
     newModel.material = GlassMaterial;
     this.scene.add(newModel)
     await this.updateSprayCoords();
+    // this.updateGui()
     // await this.updateCapCoords();
     this.render()
 
@@ -119,8 +123,9 @@ class Studio3d {
     newModel.material = AluminiumMaterial;
     this.currentSpray = newModel;
     await this.updateSprayCoords()
-    
+
     this.scene.add(newModel)
+    // this.updateGui()
     this.render()
 
   }
@@ -136,12 +141,13 @@ class Studio3d {
     newModel.material = AluminiumMaterial;
     this.currentCap = newModel;
     await this.updateCapCoords()
-    
+
     this.scene.add(newModel)
+    // this.updateGui()
     this.render()
   }
 
-  
+
   /**
    * //SETEAR LA INTERFAZ DE THREE
    * @param THREE.MESH glass 
@@ -149,27 +155,31 @@ class Studio3d {
    * @param THREE.MESH cap 
    */
 
-  setGui() {
-    // let guiControls = guiColorControls(glass, spray, cap)
-    // let colorsFolder = this.gui.addFolder('Colores')
-    // colorsFolder.addColor(guiControls, "bottle")
-    //   .listen()
-    //   .onChange(function (e) {
-    //     this.currentGlass.material.color.setStyle(e);
-    //   });
 
-    // colorsFolder.addColor(guiControls, "spray")
-    //   .listen()
-    //   .onChange(function (e) {
-    //    this.currentSpray.material.color.setStyle(e);
-    //   });
+  async createGui() {
 
-    // colorsFolder.addColor(guiControls, "cap")
-    //   .listen()
-    //   .onChange(function (e) {
-    //   this.currentCap.material.color.setStyle(e);
+    let colorsFolder=this.gui.addFolder('Colores')
 
-    //   });
+    let colorControls= {
+      bottle : this.currentGlass.material.color.getStyle(),
+      spray : this.currentSpray.material.color.getStyle(),
+      cap : this.currentCap.material.color.getStyle()
+    }
+
+    
+    let bottle_color= colorsFolder.addColor(colorControls, "bottle").listen()
+      bottle_color.onChange(updateGlassColor(this,this.currentGlass));
+
+      let spray_color= colorsFolder.addColor(colorControls, "spray").listen()
+      spray_color.onChange(function (e) {
+        this.currentSpray.material.color.setStyle(e);
+      });
+
+      let cap_color= colorsFolder.addColor(colorControls, "cap").listen();
+      cap_color.onChange(function (e) {
+        this.currentCap.material.color.setStyle(e);
+
+      });
   }
 
   // SETEAR LOS MODELOS/MESH Y APLICAR MATERIALES
@@ -186,6 +196,7 @@ class Studio3d {
     this.currentCap = cap;
     this.updateCapCoords();
     this.updateSprayCoords();
+    this.createGui()
   }
 
   /**
@@ -195,11 +206,15 @@ class Studio3d {
 
     await loadModels();
     await this.setModels();
-    let mesa= await retrieveModel('table')
-    mesa.material= new MeshStandardMaterial({color:'white'})
-    this.controls.addEventListener( 'change', ()=>{this.renderer.render(this.scene, this.camera)} );
-    this.setGui()
-    this.scene.add(this.currentGlass, this.currentCap, this.currentSpray,mesa);
+    let mesa = await retrieveModel('table')
+    let room = await retrieveModel('room')
+    mesa.material = WoodMaterial();
+    mesa.material.needsUpdate = true;
+    room.material = RoomMaterial;
+    this.controls.addEventListener('change', () => { this.renderer.render(this.scene, this.camera) });
+   
+
+    this.scene.add(this.currentGlass, this.currentCap, this.currentSpray, mesa, room);
 
   }
 
@@ -207,8 +222,8 @@ class Studio3d {
    * RENDERIZAR EN PANTALLA
    */
   render() {
-   
-    this.controls.update()
+
+
     this.renderer.render(this.scene, this.camera);
 
   }

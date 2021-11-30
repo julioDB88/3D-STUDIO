@@ -1,4 +1,4 @@
-import { Mesh } from 'three';
+
 import {
     GLTFLoader
 } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -6,7 +6,7 @@ import {
 import {
     setupModel
 } from '../setupModel';
-import { Aluminium, glass, glassMaterial } from './materials';
+
 
 let allModels=[];
 async function loadModels(model) {
@@ -21,12 +21,12 @@ async function loadModels(model) {
         loader.loadAsync('../models/klee.glb'),
         loader.loadAsync('../models/spray1.glb'),
         loader.loadAsync('../models/spray2.glb'),
+        loader.loadAsync('../models/room.glb'),
         // loader.loadAsync('../models/cap1.glb'),
         // loader.loadAsync('../models/cap2.glb'),
         // loader.loadAsync('../models/cap3.glb'),
     ]);
     models.forEach(model=>{
-        console.log(model);
         allModels.push(setupModel(model))
     })
    
