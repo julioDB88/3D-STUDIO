@@ -1,14 +1,9 @@
 const {
-  BackSide,
   MeshStandardMaterial,
   MeshPhysicalMaterial,
-  MixOperation,
   RGBFormat,
   LinearMipmapLinearFilter,
   WebGLCubeRenderTarget,
-  MeshPhongMaterial,
-  TextureLoader,
-  RepeatWrapping,
 } = require("three");
 
 const glassSettings1 = new MeshPhysicalMaterial({
@@ -43,7 +38,8 @@ const GlassMaterial = new MeshPhysicalMaterial({
 })
 
 const AluminiumMaterial = new MeshPhysicalMaterial({
-  metalness: 1,
+  metalness: .6,
+  transmission: .55,
   clearcoat: 1.0,
 });
 const RoomMaterial = new MeshPhysicalMaterial({
@@ -51,13 +47,6 @@ const RoomMaterial = new MeshPhysicalMaterial({
   clearcoat: 1.0,
   color:'blue'
 });
-const WoodMaterial = function () {
-  const texture = new TextureLoader().load("../textures/wood.jpg");
-  texture.wrapS = RepeatWrapping;
-  texture.wrapT = RepeatWrapping;
-  texture.repeat.set(4, 4);
-  var cbmaterial = new MeshPhongMaterial({ map: texture });
-  return cbmaterial;
-};
 
-module.exports = { GlassMaterial, BasicMaterial, AluminiumMaterial, WoodMaterial,RoomMaterial };
+
+module.exports = { GlassMaterial, BasicMaterial, AluminiumMaterial,RoomMaterial };

@@ -1,4 +1,5 @@
 
+import { MeshPhongMaterial, RepeatWrapping, TextureLoader } from 'three';
 import {
     GLTFLoader
 } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -6,6 +7,7 @@ import {
 import {
     setupModel
 } from '../setupModel';
+import { WoodMaterial } from './materials';
 
 
 let allModels=[];
@@ -35,6 +37,15 @@ async function loadModels(model) {
 async function retrieveModel(modelName) {
   
   let requested_model = await allModels.find(objectData=>modelName==objectData.name)
+  if(modelName=='table'){
+    let texture = await new TextureLoader().loadAsync("../textures/wood.jpg");
+    texture.wrapS = RepeatWrapping;
+    texture.wrapT = RepeatWrapping;
+    texture.repeat.set(4, 4);
+    var cbmaterial = new MeshPhongMaterial({ map: texture });
+   
+      requested_model.material=cbmaterial;
+  }
     return requested_model;
 
 }
