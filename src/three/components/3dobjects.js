@@ -23,7 +23,6 @@ async function loadModels(model) {
         loader.loadAsync('../models/klee.glb'),
         loader.loadAsync('../models/spray1.glb'),
         loader.loadAsync('../models/spray2.glb'),
-        loader.loadAsync('../models/room.glb'),
         // loader.loadAsync('../models/cap1.glb'),
         // loader.loadAsync('../models/cap2.glb'),
         // loader.loadAsync('../models/cap3.glb'),
@@ -35,7 +34,7 @@ async function loadModels(model) {
 
 }
 async function retrieveModel(modelName) {
-  
+   
   let requested_model = await allModels.find(objectData=>modelName==objectData.name)
   if(modelName=='table'){
     let texture = await new TextureLoader().loadAsync("../textures/wood.jpg");
@@ -46,8 +45,9 @@ async function retrieveModel(modelName) {
    
       requested_model.material=cbmaterial;
   }
-    return requested_model;
 
+  return requested_model
+ 
 }
 
 

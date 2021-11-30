@@ -8,6 +8,7 @@ import {
   createCamera
 } from "./components/camera.js";
 import {
+
   createScene
 } from "./components/scene.js";
 import {
@@ -31,6 +32,7 @@ import {
 import {
   locations
 } from "./components/locations";
+import { CubeTextureLoader } from "three";
 
 
 
@@ -48,6 +50,17 @@ class Studio3d {
     this.container = container
     this.renderer = createRenderer();
     this.scene = createScene();
+    const loader = new CubeTextureLoader();
+    const texture = loader.load([
+      'textures/px.png',
+      'textures/nx.png',
+      'textures/py.png',
+      'textures/ny.png',
+      'textures/pz.png',
+      'textures/nz.png',
+    ]);
+    this.scene.background = texture;
+    
     this.container.appendChild(this.renderer.domElement);
     this.controls = createControls(this.camera, this.renderer.domElement);
 
@@ -80,7 +93,9 @@ class Studio3d {
   updateSprayCoords = async () => {
     let model_locations = locations.find(elem => this.currentSpray.name == elem.name).values
     let coords = model_locations.find(e => e.name === this.currentGlass.name).data.location
+    let dimensions = model_locations.find(e => e.name === this.currentGlass.name).data.dimensions
     this.currentSpray.position.set(coords.x, coords.y, coords.z);
+    // this.currentSpray.scale.set(dimensions.x, dimensions.y, dimensions.z);
   }
   updateCapCoords = async () => {
     let model_locations = locations.find(elem => this.currentCap.name == elem.name).values
@@ -196,6 +211,7 @@ class Studio3d {
   // SETEAR LOS MODELOS/MESH Y APLICAR MATERIALES
   async setModels() {
     const glass = await retrieveModel('bruce')
+    console.log(glass)
     glass.name = 'bruce'
     glass.material = GlassMaterial;
     this.currentGlass = glass;
@@ -218,12 +234,11 @@ class Studio3d {
     await loadModels();
     await this.setModels();
     let mesa = await retrieveModel('table')
-    let room = await retrieveModel('room')
    
     this.controls.addEventListener('change', () => { this.renderer.render(this.scene, this.camera) });
     
 
-    this.scene.add(this.currentGlass, this.currentCap, this.currentSpray, mesa, room);
+    this.scene.add(this.currentGlass, this.currentCap, this.currentSpray,mesa);
 
   }
 
