@@ -24,6 +24,15 @@ $('.change-spray').on('click',function(){
 
     studio.changeSpray(model)
 })
+$('.painting').on('click',function(){
+    if($(this).hasClass('set-opaque')){
+        studio.setOpaqueGlass()
+    }else{
+        studio.setTranslucidGlass() 
+    }
+$('.painting').toggleClass('d-none')
+ 
+})
 window.addEventListener('resize',function(){
   
     studio.onWindowResize();

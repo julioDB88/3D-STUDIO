@@ -4,7 +4,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const isProduction = process.env.NODE_ENV == "production";
 
 const config = {
@@ -25,6 +25,19 @@ const config = {
 
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
+    new UglifyJsPlugin({
+      minify(file, sourceMap) {
+        const extractedComments = [];
+
+        // Custom logic for extract comments
+
+        const { error, map, code, warnings } = require('uglify-js') // Or require('./path/to/uglify-module')
+          .minify(file, {
+            /* Your options for minification */
+          });
+
+        return { error, map, code, warnings, extractedComments };
+    }})
   ],
   module: {
     rules: [

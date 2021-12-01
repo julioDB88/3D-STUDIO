@@ -7,7 +7,7 @@ import {
 import {
     setupModel
 } from '../setupModel';
-import { WoodMaterial } from './materials';
+
 
 
 let allModels=[];
@@ -44,6 +44,7 @@ async function retrieveModel(modelName) {
     var cbmaterial = new MeshPhongMaterial({ map: texture });
    
       requested_model.material=cbmaterial;
+    //   requested_model.position.set(0,-.1,0)
   }
 
   return requested_model

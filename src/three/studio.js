@@ -8,7 +8,6 @@ import {
   createCamera
 } from "./components/camera.js";
 import {
-
   createScene
 } from "./components/scene.js";
 import {
@@ -25,14 +24,12 @@ import {
 } from './systems/controls.js';
 
 import {
-
   AluminiumMaterial,
   GlassMaterial
 } from "./components/materials";
 import {
   locations
 } from "./components/locations";
-import { CubeTextureLoader } from "three";
 
 
 
@@ -50,28 +47,15 @@ class Studio3d {
     this.container = container
     this.renderer = createRenderer();
     this.scene = createScene();
-    const loader = new CubeTextureLoader();
-    const texture = loader.load([
-      'textures/px.png',
-      'textures/nx.png',
-      'textures/py.png',
-      'textures/ny.png',
-      'textures/pz.png',
-      'textures/nz.png',
-    ]);
-    this.scene.background = texture;
+    
     
     this.container.appendChild(this.renderer.domElement);
     this.controls = createControls(this.camera, this.renderer.domElement);
 
     this.gui = createGui()
 
-
-    const {
-      direct_light,
-      ambient_light
-    } = createLights();
-    direct_light.intensity = 1.9;
+    const {direct_light,ambient_light} = createLights();
+   
     this.scene.add(direct_light, ambient_light)
 
     this.renderer.setSize(container.offsetWidth, container.offsetHeight);
@@ -93,7 +77,7 @@ class Studio3d {
   updateSprayCoords = async () => {
     let model_locations = locations.find(elem => this.currentSpray.name == elem.name).values
     let coords = model_locations.find(e => e.name === this.currentGlass.name).data.location
-    let dimensions = model_locations.find(e => e.name === this.currentGlass.name).data.dimensions
+    // let dimensions = model_locations.find(e => e.name === this.currentGlass.name).data.dimensions
     this.currentSpray.position.set(coords.x, coords.y, coords.z);
     // this.currentSpray.scale.set(dimensions.x, dimensions.y, dimensions.z);
   }
@@ -111,14 +95,12 @@ class Studio3d {
   async changeGlass(model) {
     let oldModel = this.scene.getObjectByName(this.currentGlass.name)
     let newModel = await retrieveModel(model)
-
-
-    this.scene.remove(oldModel)
+   
+   this.scene.remove(oldModel)
     this.currentGlass = newModel;
     newModel.material = GlassMaterial;
     this.scene.add(newModel)
     await this.updateSprayCoords();
- 
     await this.updateCapCoords();
     this.render()
 
@@ -157,6 +139,23 @@ class Studio3d {
 
     this.scene.add(newModel)
     // 
+    this.render()
+  }
+    /**
+   * 
+   * QUitar tapon
+   */
+  async removeCap(model){
+    let cap= this.scene.getObjectByName(model)
+    this.scene.remove(cap)
+  }
+
+  async setOpaqueGlass(){
+    this.currentGlass.material.roughness =.7;
+    this.render()
+  }
+  async setTranslucidGlass(){
+    this.currentGlass.material.roughness =.07;
     this.render()
   }
 
@@ -215,10 +214,10 @@ class Studio3d {
     glass.name = 'bruce'
     glass.material = GlassMaterial;
     this.currentGlass = glass;
-    const spray = await retrieveModel('spray2')
+    const spray = await retrieveModel('spray1')
     spray.material = AluminiumMaterial
     this.currentSpray = spray;
-    const cap = await retrieveModel('spray1')
+    const cap = await retrieveModel('spray2')
     cap.material = AluminiumMaterial
     this.currentCap = cap;
     this.updateCapCoords();
@@ -238,7 +237,7 @@ class Studio3d {
     this.controls.addEventListener('change', () => { this.renderer.render(this.scene, this.camera) });
     
 
-    this.scene.add(this.currentGlass, this.currentCap, this.currentSpray,mesa);
+    this.scene.add(this.currentGlass,  this.currentSpray,mesa);//this.currentCap,
 
   }
 
