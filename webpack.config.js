@@ -16,6 +16,11 @@ const config = {
     open: true,
     host: "localhost",
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
   plugins: [
     
     new HtmlWebpackPlugin({
@@ -54,8 +59,19 @@ const config = {
         type: "asset",
       },
 
-      // Add your rules for custom modules here
-      // Learn more about loaders from https://webpack.js.org/loaders/
+      {
+        test: /\.(glb|gltf|obj|hdr)$/,
+        use:
+        [
+            {
+                loader: 'file-loader',
+                options:
+                {
+                    outputPath: 'assets/models/'
+                }
+            }
+        ]
+    },
     ],
   },
 };

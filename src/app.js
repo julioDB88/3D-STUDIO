@@ -1,7 +1,8 @@
 import {
     Studio3d
 } from './three/studio'
-
+import * as $ from 'jquery';
+import {WEBGL } from './three/webgl';
 let canvas = document.getElementById('3dstudio');
 const studio = new Studio3d(canvas);
 
@@ -49,6 +50,10 @@ window.addEventListener('resize',function(){
     studio.onWindowResize();
 }) 
 
+if (WEBGL.isWebGLAvailable()){
+    startStudio();
+}else{
+    const warning = WEBGL.getWebGLErrorMessage();
+    document.getElementById( '3dstudio' ).appendChild( warning );
+}
 
-
-startStudio();

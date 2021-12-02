@@ -23,10 +23,7 @@ import {
   createControls
 } from './systems/controls.js';
 
-import {
-  AluminiumMaterial,
-  GlassMaterial
-} from "./components/materials";
+
 import {
   locations
 } from "./components/locations";
@@ -42,21 +39,21 @@ class Studio3d {
     this.currentGlass = null;
     this.currentCap = null;
     this.currentSpray = null;
-    this.table= null;
+    this.table = null;
 
     this.camera = createCamera();
     this.container = container
     this.renderer = createRenderer();
-    const {direct_light,ambient_light} = createLights();
+    const { direct_light, ambient_light } = createLights();
     this.direct_light = direct_light;
-    this.ambient_light= ambient_light;
-    
-    
+    this.ambient_light = ambient_light;
+
+
     this.container.appendChild(this.renderer.domElement);
     this.controls = createControls(this.camera, this.renderer.domElement);
 
     this.gui = createGui()
-    
+
 
 
     this.renderer.setSize(container.offsetWidth, container.offsetHeight);
@@ -83,9 +80,9 @@ class Studio3d {
     // this.currentSpray.scale.set(dimensions.x, dimensions.y, dimensions.z);
   }
   updateCapCoords = async () => {
-    let model_locations = locations.find(elem => this.currentCap.name == elem.name).values
-    let coords = model_locations.find(e => e.name === this.currentGlass.name).data.location
-    this.currentCap.position.set(coords.x, coords.y, coords.z);
+    // let model_locations = locations.find(elem => this.currentCap.name == elem.name).values
+    // let coords = model_locations.find(e => e.name === this.currentGlass.name).data.location
+    // this.currentCap.position.set(coords.x, coords.y, coords.z);
   }
 
   /**
@@ -96,10 +93,9 @@ class Studio3d {
   async changeGlass(model) {
     let oldModel = this.scene.getObjectByName(this.currentGlass.name)
     let newModel = await retrieveModel(model)
-   
-   this.scene.remove(oldModel)
+
+    this.scene.remove(oldModel)
     this.currentGlass = newModel;
-    newModel.material = GlassMaterial;
     this.scene.add(newModel)
     await this.updateSprayCoords();
     await this.updateCapCoords();
@@ -117,10 +113,8 @@ class Studio3d {
       this.scene.remove(oldModel)
     }
 
-    
     this.currentSpray = newModel;
-    // this.currentSpray.material = AluminiumMaterial;
-    // this.currentSpray.material.needsUpdate=true;
+
     await this.updateSprayCoords()
 
     this.scene.add(newModel)
@@ -136,7 +130,6 @@ class Studio3d {
       this.scene.remove(oldModel)
     }
 
-    newModel.material = AluminiumMaterial;
     this.currentCap = newModel;
     await this.updateCapCoords()
 
@@ -144,31 +137,31 @@ class Studio3d {
     // 
     this.render()
   }
-    /**
-   * 
-   * QUitar/poner tapon
-   */
-  async removeCap(model){
-    let cap= this.scene.getObjectByName(model)
+  /**
+ * 
+ * QUitar/poner tapon
+ */
+  async removeCap(model) {
+    let cap = this.scene.getObjectByName(model)
     this.scene.remove(cap)
   }
-  async setCap(){
-    let cap= await retrieveModel('cap1')
+  async setCap() {
+    let cap = await retrieveModel('cap1')
     this.currentCap = cap;
     this.scene.add(cap)
   }
 
-     /**
-   * 
-   * QUitar/poner vidrio translucido
-   */
+  /**
+* 
+* QUitar/poner vidrio translucido
+*/
 
-  async setOpaqueGlass(){
-    this.currentGlass.material.roughness =.7;
+  async setOpaqueGlass() {
+    this.currentGlass.material.roughness = .7;
     this.render()
   }
-  async setTranslucidGlass(){
-    this.currentGlass.material.roughness =.07;
+  async setTranslucidGlass() {
+    this.currentGlass.material.roughness = .07;
     this.render()
   }
 
@@ -197,7 +190,7 @@ class Studio3d {
     let that = this;
     let bottle_color = colorsFolder.addColor(colorControls, "bottle")
     bottle_color.onChange(function (e) {
-      
+
       botella.material.color.setStyle(e);
       that.render()
     });
@@ -224,16 +217,16 @@ class Studio3d {
   async setModels() {
     const glass = await retrieveModel('bruce')
     glass.name = 'bruce'
-    glass.material = GlassMaterial;
+
     this.currentGlass = glass;
     const spray = await retrieveModel('spray1')
-    spray.material = AluminiumMaterial
+
     this.currentSpray = spray;
     const cap = await retrieveModel('spray2')
-    cap.material = AluminiumMaterial
+
     this.currentCap = cap;
     this.table = await retrieveModel('table')
-    console.log('asdsad',this.table)
+
     this.updateCapCoords();
     this.updateSprayCoords();
     this.createGui()
@@ -246,15 +239,15 @@ class Studio3d {
 
     await loadModels();
     await this.setModels();
-    
-   
-    
-    this.scene = await createScene();
-   
-    this.controls.addEventListener('change', () => { this.renderer.render(this.scene, this.camera) });
-    
 
-    this.scene.add(this.ambient_light,this.direct_light,this.currentGlass,  this.currentSpray,this.table)
+
+
+    this.scene = await createScene();
+
+    this.controls.addEventListener('change', () => { this.renderer.render(this.scene, this.camera) });
+
+
+    this.scene.add(this.ambient_light, this.direct_light, this.currentGlass, this.currentSpray, this.table)
     //this.currentCap,
 
   }

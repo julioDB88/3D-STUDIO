@@ -1,9 +1,8 @@
 function setupModel(data) {
-  if(data.scene.children.length==7){
-    let object={};   
-    object.value=  data.scene
-    object.name='room'
-  return object
+ 
+  if(!data.scene){
+    
+  return data
   }else{
     return data.scene.children[0];
   }
