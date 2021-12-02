@@ -33,6 +33,17 @@ $('.painting').on('click',function(){
 $('.painting').toggleClass('d-none')
  
 })
+
+$('.capping').on('click',function(){
+    if($(this).hasClass('set-cap')){
+        studio.setCap()
+    }else{
+        studio.removeCap() 
+    }
+$('.capping').toggleClass('d-none')
+ 
+})
+
 window.addEventListener('resize',function(){
   
     studio.onWindowResize();

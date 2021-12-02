@@ -42,21 +42,22 @@ class Studio3d {
     this.currentGlass = null;
     this.currentCap = null;
     this.currentSpray = null;
+    this.table= null;
 
     this.camera = createCamera();
     this.container = container
     this.renderer = createRenderer();
-    this.scene = createScene();
+    const {direct_light,ambient_light} = createLights();
+    this.direct_light = direct_light;
+    this.ambient_light= ambient_light;
     
     
     this.container.appendChild(this.renderer.domElement);
     this.controls = createControls(this.camera, this.renderer.domElement);
 
     this.gui = createGui()
+    
 
-    const {direct_light,ambient_light} = createLights();
-   
-    this.scene.add(direct_light, ambient_light)
 
     this.renderer.setSize(container.offsetWidth, container.offsetHeight);
 
@@ -116,8 +117,10 @@ class Studio3d {
       this.scene.remove(oldModel)
     }
 
-    newModel.material = AluminiumMaterial;
+    
     this.currentSpray = newModel;
+    // this.currentSpray.material = AluminiumMaterial;
+    // this.currentSpray.material.needsUpdate=true;
     await this.updateSprayCoords()
 
     this.scene.add(newModel)
@@ -143,12 +146,22 @@ class Studio3d {
   }
     /**
    * 
-   * QUitar tapon
+   * QUitar/poner tapon
    */
   async removeCap(model){
     let cap= this.scene.getObjectByName(model)
     this.scene.remove(cap)
   }
+  async setCap(){
+    let cap= await retrieveModel('cap1')
+    this.currentCap = cap;
+    this.scene.add(cap)
+  }
+
+     /**
+   * 
+   * QUitar/poner vidrio translucido
+   */
 
   async setOpaqueGlass(){
     this.currentGlass.material.roughness =.7;
@@ -210,7 +223,6 @@ class Studio3d {
   // SETEAR LOS MODELOS/MESH Y APLICAR MATERIALES
   async setModels() {
     const glass = await retrieveModel('bruce')
-    console.log(glass)
     glass.name = 'bruce'
     glass.material = GlassMaterial;
     this.currentGlass = glass;
@@ -220,6 +232,8 @@ class Studio3d {
     const cap = await retrieveModel('spray2')
     cap.material = AluminiumMaterial
     this.currentCap = cap;
+    this.table = await retrieveModel('table')
+    console.log('asdsad',this.table)
     this.updateCapCoords();
     this.updateSprayCoords();
     this.createGui()
@@ -232,12 +246,16 @@ class Studio3d {
 
     await loadModels();
     await this.setModels();
-    let mesa = await retrieveModel('table')
+    
+   
+    
+    this.scene = await createScene();
    
     this.controls.addEventListener('change', () => { this.renderer.render(this.scene, this.camera) });
     
 
-    this.scene.add(this.currentGlass,  this.currentSpray,mesa);//this.currentCap,
+    this.scene.add(this.ambient_light,this.direct_light,this.currentGlass,  this.currentSpray,this.table)
+    //this.currentCap,
 
   }
 

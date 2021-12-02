@@ -1,10 +1,10 @@
 import {  CubeTextureLoader, Scene } from 'three';
 
 
-function createScene() {
+async function createScene() {
   const scene = new Scene();
   const loader = new CubeTextureLoader();
-    const texture = loader.load([
+    const texture = await loader.loadAsync([
       'textures/px (3).png',
       'textures/nx (2).png',
       'textures/py (2).png',

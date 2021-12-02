@@ -1,1 +1,34 @@
-<!doctype html><html lang="en"><head><title>Title</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><script defer="defer" src="main.js"></script></head><body><div class="container-fluid"><div class="row"><div class="col-12" id="container"></div><div class="col-12 col-md-3 col-lg-2"><div class="studio-setting-row"><h4>Envase</h4><div class="grid grid-col-4"><button class="btn btn-primary my-2 change-glass" id="bruce">Bruce</button> <button class="btn btn-primary my-2 change-glass" id="june">June</button> <button class="btn btn-primary my-2 change-glass" id="dalia">Dalia</button> <button class="btn btn-primary my-2 change-glass" id="max">Max</button> <button class="btn btn-primary my-2 change-glass" id="orris">Orris</button></div><div class="d-flex"><h4>color</h4><input type="color" name="glass-color" id="glass-color"></div></div><div class="studio-setting-row"><h4>Spray</h4><div class="d-flex"><button class="btn btn-primary my-2 change-spray" id="spray1">Collar 1</button> <button class="btn btn-primary my-2 change-spray" id="spray2">Collar 2</button></div><div class="d-flex"><h4>color</h4><input type="color" name="glass-color" id="glass-color"></div></div><div class="studio-setting-row"><h4>Tapon</h4><div class="d-flex"><button class="btn btn-primary change-cap" id="cap-1">Cap 1</button> <button class="btn btn-primary change-cap" id="cap-2">Cap 2</button> <button class="btn btn-primary change-cap" id="cap-3">Cap 3</button></div><div class="d-flex"><h4>color</h4><input type="color" name="glass-color" id="glass-color"></div></div></div><div class="col-12 col-md-9 col-lg-10"><div id="3dstudio" style="height: 100vh;width: 100%;"></div></div></div></div><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script></body></html>
+<!doctype html><html lang="en"><head><title>Title</title><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/><style>.dg .c {
+            line-height: 0;
+            padding-bottom: 3px;
+          }
+      *{
+       font-family:  'Poppins', sans-serif;
+      }
+      .panel{
+        background-color: #3a4141;
+      }
+      .panel-settings{
+        padding: 1rem 0;
+      }
+      .stn-btn{
+        background-color: transparent;
+        border: 2px solid #78cfe3;
+        padding: 0.2em 1.3em;
+        border-radius: 2px;
+        color: white;
+      font-size: 13px;
+      margin:5px;
+      }
+      .panel-row{
+        padding: .5em;
+      }
+      .panel-title{
+        color:rgb(255, 255, 255);
+        border-bottom:1px solid rgb(255, 255, 255);;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+
+      }</style><script defer="defer" src="main.js"></script></head><body><div class="container-fluid"><div class="row panel"><div class="col-12 col-md-3 col-lg-2 panel-settings"><div class="panel-row"><h4 class="panel-title">Frasco</h4><div class="grid grid-col-3"><button class="stn-btn change-glass" id="bruce">Bruce</button> <button class="stn-btn change-glass" id="june">June</button> <button class="stn-btn change-glass" id="dalia">Dalia</button> <button class="stn-btn change-glass" id="max">Max</button> <button class="stn-btn change-glass" id="orris">Orris</button></div></div><div class="panel-row"><h4 class="panel-title">Tapón</h4><div class="grid grid-col-3"><button class="stn-btn change-cap" id="cap-1">A</button> <button class="stn-btn change-cap" id="cap-2">B</button> <button class="stn-btn change-cap" id="cap-3">C</button><hr/><button class="stn-btn capping remove-cap" id="cap-3">Sin tapón</button> <button class="stn-btn capping set-cap d-none" id="cap-3">Con tapón</button></div></div><div class="panel-row"><h4 class="panel-title">Pintura</h4><div class="d-flex"><button class="stn-btn painting set-opaque">Mate</button> <button class="stn-btn painting set-trans d-none">Translúcido</button></div></div></div><div class="col-12 col-md-9 col-lg-10"><div id="3dstudio" style="height: 100vh; width: 100%"></div></div></div></div><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script></body></html>
