@@ -27,6 +27,7 @@ import {
 import {
   locations
 } from "./components/locations";
+import { LoadingManager } from "three";
 
 
 
@@ -231,11 +232,22 @@ class Studio3d {
     this.updateSprayCoords();
     this.createGui()
   }
+  /**
+   * Loading screen
+   */
+
+
+  onTransitionEnd(event) {
+
+    event.target.remove();
+
+  }
 
   /**
    * INICAR STUDIO 3D
    */
   async init() {
+
 
     await loadModels();
     await this.setModels();
@@ -260,6 +272,15 @@ class Studio3d {
 
     this.renderer.render(this.scene, this.camera);
 
+    setTimeout(() => {
+      const loadingScreen = document.getElementById('loading-screen');
+      loadingScreen.classList.add('fade-out');
+
+    }, 100);
+    setTimeout(() => {
+      const loadingScreen = document.getElementById('loading-screen');
+      loadingScreen.style.display = 'none'
+    }, 500);
   }
 }
 

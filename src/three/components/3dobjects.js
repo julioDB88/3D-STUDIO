@@ -34,10 +34,15 @@ async function loadModels(model) {
     // loader.loadAsync('../models/cap2.glb'),
     // loader.loadAsync('../models/cap3.glb'),
   ]);
+  let loader2 = new OBJLoader();
+  let perfumes = await loader2.loadAsync('../models/perfumes.obj')
+  perfumes.children.forEach(model => {
+    allModels.push(setupModel(model))
+  })
   models.forEach(model => {
     allModels.push(setupModel(model))
   })
-console.log(allModels);
+
 
 }
 async function retrieveModel(modelName) {
@@ -56,7 +61,7 @@ async function retrieveModel(modelName) {
     table.rotateY(1.5)
     table.name = 'table';
     table.children.forEach(elem => elem.material = TableMaterial);
-    console.log(table);
+   
     requested_model = setupModel(table);
 
   } else if (modelName.includes('spray')) {
