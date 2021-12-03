@@ -16,7 +16,7 @@ const locations = [{
         }
     },
     {
-        name: 'orris',
+        name: 'tokyo',
         data: {
             location: {
                 x: 0.010259062051773071,
@@ -109,7 +109,7 @@ const locations = [{
         }
     },
     {
-        name: 'orris',
+        name: 'tokyo',
         data: {
             location: {
                 x: 0.010259062051773071,
@@ -202,7 +202,7 @@ const locations = [{
         }
     },
     {
-        name: 'orris',
+        name: 'tokyo',
         data: {
             location: {
                 x: 0.010259062051773071,
@@ -280,7 +280,7 @@ const locations = [{
         }
     },
     {
-        name: 'orris',
+        name: 'tokyo',
         data: {
             location: {
                 x: 0.010259062051773071,

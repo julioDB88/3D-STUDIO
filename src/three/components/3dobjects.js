@@ -27,6 +27,7 @@ async function loadModels(model) {
     loader.loadAsync('../models/orris.glb'),
     loader.loadAsync('../models/klee.glb'),
     loader.loadAsync('../models/spray1.glb'),
+    loader.loadAsync('../models/tokyo.glb'),
     loader.loadAsync('../models/cap1.glb'),
 
     // loader.loadAsync('../models/cap1.glb'),
@@ -36,7 +37,7 @@ async function loadModels(model) {
   models.forEach(model => {
     allModels.push(setupModel(model))
   })
-
+console.log(allModels);
 
 }
 async function retrieveModel(modelName) {
