@@ -25,23 +25,18 @@ async function loadModels(model) {
     loader.loadAsync('../models/june.glb'),
     loader.loadAsync('../models/max.glb'),
     loader.loadAsync('../models/orris.glb'),
+    loader.loadAsync('../models/orange.glb'),
     loader.loadAsync('../models/klee.glb'),
     loader.loadAsync('../models/spray1.glb'),
     loader.loadAsync('../models/tokyo.glb'),
     loader.loadAsync('../models/cap1.glb'),
-
-    // loader.loadAsync('../models/cap1.glb'),
-    // loader.loadAsync('../models/cap2.glb'),
-    // loader.loadAsync('../models/cap3.glb'),
+    loader.loadAsync('../models/cap2.glb'),
   ]);
-  let loader2 = new OBJLoader();
-  let perfumes = await loader2.loadAsync('../models/perfumes.obj')
-  perfumes.children.forEach(model => {
-    allModels.push(setupModel(model))
-  })
+
   models.forEach(model => {
     allModels.push(setupModel(model))
   })
+  console.log(allModels);
 
 
 }
@@ -68,6 +63,7 @@ async function retrieveModel(modelName) {
 
     requested_model.material = await AluminiumMaterial;
   } else if (modelName.includes('cap')) {
+    requested_model=await allModels.find(objectData => 'Perfume_cap_10_Cube007' == objectData.name)
 
     requested_model.material = await AluminiumMaterial;
   } else {

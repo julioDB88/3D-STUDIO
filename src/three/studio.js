@@ -223,7 +223,7 @@ class Studio3d {
     const spray = await retrieveModel('spray1')
 
     this.currentSpray = spray;
-    const cap = await retrieveModel('spray2')
+    const cap = await retrieveModel('cap2')
 
     this.currentCap = cap;
     this.table = await retrieveModel('table')
