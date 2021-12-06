@@ -27,7 +27,7 @@ import {
 import {
   locations
 } from "./components/locations";
-import { LoadingManager } from "three";
+
 
 
 
@@ -81,9 +81,9 @@ class Studio3d {
     // this.currentSpray.scale.set(dimensions.x, dimensions.y, dimensions.z);
   }
   updateCapCoords = async () => {
-    // let model_locations = locations.find(elem => this.currentCap.name == elem.name).values
-    // let coords = model_locations.find(e => e.name === this.currentGlass.name).data.location
-    // this.currentCap.position.set(coords.x, coords.y, coords.z);
+     let model_locations = locations.find(elem => this.currentCap.name == elem.name).values
+     let coords = model_locations.find(e => e.name === this.currentGlass.name).data.location
+       this.currentCap.position.set(coords.x, coords.y, coords.z)
   }
 
   /**
@@ -142,14 +142,17 @@ class Studio3d {
  * 
  * QUitar/poner tapon
  */
-  async removeCap(model) {
-    let cap = this.scene.getObjectByName(model)
+  async removeCap() {
+    console.log('heii');
+    let cap = this.scene.getObjectByName(this.currentCap.name)
     this.scene.remove(cap)
+    this.render()
   }
   async setCap() {
-    let cap = await retrieveModel('cap1')
+    let cap = await retrieveModel(this.currentCap.name)
     this.currentCap = cap;
     this.scene.add(cap)
+    // this.render()
   }
 
   /**
@@ -217,16 +220,12 @@ class Studio3d {
   // SETEAR LOS MODELOS/MESH Y APLICAR MATERIALES
   async setModels() {
     const glass = await retrieveModel('bruce')
-    glass.name = 'bruce'
-
     this.currentGlass = glass;
-    const spray = await retrieveModel('spray1')
-
+    const spray = await retrieveModel('spray')
     this.currentSpray = spray;
-    const cap = await retrieveModel('cap2')
-
+    const cap = await retrieveModel('cap1')
     this.currentCap = cap;
-    this.table = await retrieveModel('table')
+    this.table = await retrieveModel('mesa')
 
     this.updateCapCoords();
     this.updateSprayCoords();
@@ -259,8 +258,7 @@ class Studio3d {
     this.controls.addEventListener('change', () => { this.renderer.render(this.scene, this.camera) });
 
 
-    this.scene.add(this.ambient_light, this.direct_light, this.currentGlass, this.currentSpray, this.table)
-    //this.currentCap,
+    this.scene.add(this.ambient_light, this.direct_light, this.currentGlass, this.currentSpray, this.currentCap,this.table)
 
   }
 

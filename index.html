@@ -2,20 +2,17 @@
 <html lang="en">
   <head>
     <title>Title</title>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      content="width=device-width,initial-scale=1,shrink-to-fit=no"
     />
-    <!-- fonts  -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
       rel="stylesheet"
     />
-    <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -23,160 +20,178 @@
       crossorigin="anonymous"
     />
     <style>
-          .dg .c {
-            line-height: 0;
-            padding-bottom: 3px;
-          }
-      *{
-       font-family:  'Poppins', sans-serif;
+      .dg .c {
+        line-height: 0;
+        padding-bottom: 3px;
       }
-      .panel{
+      * {
+        font-family: "Poppins", sans-serif;
+      }
+      .panel {
         background-color: #3a4141;
       }
-      .panel-settings{
+      .panel-settings {
         padding: 1rem 0;
       }
-      .stn-btn{
+      .stn-btn {
         background-color: transparent;
-        border: 2px solid #78cfe3;
-        padding: 0.2em 1.3em;
+        border: 1px solid #78cfe3;
+        padding: 0.5em;
         border-radius: 2px;
         color: white;
-      font-size: 13px;
-      margin:5px;
+        font-size: 13px;
+        margin: 5px;
+        display: grid;
+        width: 70px;
+        text-align: center;
       }
-      .panel-row{
-        padding: .5em;
+      .stn-btn img {
+        height: 40px;
+        margin: auto;
       }
-      .panel-title{
-        color:rgb(255, 255, 255);
-        border-bottom:1px solid rgb(255, 255, 255);;
+      .panel-row {
+        padding: 0.5em;
+      }
+      .panel-title {
+        color: rgb(255, 255, 255);
+        border-bottom: 1px solid rgb(255, 255, 255);
         font-size: 16px;
         font-weight: 600;
       }
 
-
       #loading-screen {
-	position: absolute;
-	z-index: 2;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #000000;
-	opacity: 1;
- 	transition: 1s opacity;
-}
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000000;
+        opacity: 1;
+        transition: 1s opacity;
+      }
 
-#loading-screen.fade-out {
-    opacity: 0;
-}
+      #loading-screen.fade-out {
+        opacity: 0;
+      }
 
-#loader {
-    display: block;
-    position: relative;
-    left: 50%;
-    top: 50%;
-    width: 150px;
-    height: 150px;
-    margin: -75px 0 0 -75px;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top-color: #9370DB;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-}
-#loader:before {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top-color: #BA55D3;
-    -webkit-animation: spin 3s linear infinite;
-    animation: spin 3s linear infinite;
-}
-#loader:after {
-    content: "";
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top-color: #FF00FF;
-    -webkit-animation: spin 1.5s linear infinite;
-    animation: spin 1.5s linear infinite;
-}
-@-webkit-keyframes spin {
-    0%   {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-@keyframes spin {
-    0%   {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
+      #loader {
+        display: block;
+        position: relative;
+        left: 50%;
+        top: 50%;
+        width: 150px;
+        height: 150px;
+        margin: -75px 0 0 -75px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: #9370db;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }
+      #loader:before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: #ba55d3;
+        -webkit-animation: spin 3s linear infinite;
+        animation: spin 3s linear infinite;
+      }
+      #loader:after {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: #ff00ff;
+        -webkit-animation: spin 1.5s linear infinite;
+        animation: spin 1.5s linear infinite;
+      }
+      @-webkit-keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+          -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+          -ms-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+          -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+          -ms-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
     </style>
+  
+    <!-- <script defer="defer" src="dist/bundle.js"></script> -->
   </head>
   <body>
-    <section id="loading-screen">
-
-      <div id="loader"></div>
-    
-    </section>
+    <section id="loading-screen"><div id="loader"></div></section>
     <div class="container-fluid">
       <div class="row panel">
-        <!-- <div class="col-12" id="container"></div> -->
         <div class="col-12 col-md-3 col-lg-2 panel-settings">
           <div class="panel-row">
             <h4 class="panel-title">Frasco</h4>
-            <div class="grid grid-col-3">
-              <button class="stn-btn change-glass" id="bruce">Bruce</button>
-              <button class="stn-btn change-glass" id="june">June</button>
-              <button class="stn-btn change-glass" id="dalia">Dalia</button>
-              <button class="stn-btn change-glass" id="max">Max</button>
-              <button class="stn-btn change-glass" id="tokyo">Orris</button>
-              <button class="stn-btn change-glass" id="klee">klee</button>
+            <div class="d-flex flex-wrap justify-content-center">
+              <button class="stn-btn change-glass" id="bruce">
+                <img src="./images/bruce.png" alt="" /> Bruce
+              </button>
+              <button class="stn-btn change-glass" id="june">
+                <img src="./images/june.png" alt="" />June
+              </button>
+              <button class="stn-btn change-glass" id="dalia">
+                <img src="./images/dalia.png" alt="" /> Dalia
+              </button>
+              <button class="stn-btn change-glass" id="max">
+                <img src="./images/max.png" alt="" /> Max
+              </button>
+              <button class="stn-btn change-glass" id="orris">
+                <img src="./images/orris.png" alt="" /> Orris
+              </button>
+              <button class="stn-btn change-glass" id="tokyo">
+                <img src="./images/tokyo.png" alt="" /> Tokyo
+              </button>
+              <button class="stn-btn change-glass" id="orange">
+                <img src="./images/orange.png" alt="" /> Orange
+              </button>
+              <button class="stn-btn change-glass" id="warsaw">
+                <img src="./images/warsaw.png" alt="" /> Warsaw
+              </button>
+              <button class="stn-btn change-glass" id="klee">
+                <img src="./images/klee.png" alt="" /> Klee
+              </button>
             </div>
           </div>
-          <!-- <div class="panel-row">
-            <h4 class="panel-title">Spray</h4>
-            <div class="grid grid-col-3">
-              <button class="stn-btn change-spray" id="spray1">A</button>
-              <button class="stn-btn change-spray" id="spray2">B</button>
-            </div>
-          </div> -->
           <div class="panel-row">
             <h4 class="panel-title">Tapón</h4>
-            <div class="grid grid-col-3">
-              <button class="stn-btn change-cap" id="cap-1">A</button>
-              <button class="stn-btn change-cap" id="cap-2">B</button>
-              <button class="stn-btn change-cap" id="cap-3">C</button>
-              <hr />
+            <div class="d-flex flex-wrap justify-content-center">
+              <button class="stn-btn change-cap" id="cap1">A</button>
+              <button class="stn-btn change-cap" id="cap2">B</button>
+            </div>
+            <hr />
+            <div>
               <button class="stn-btn capping remove-cap" id="cap-3">
                 Sin tapón
               </button>
-              <button class="stn-btn capping set-cap d-none" id="cap-3">
+              <button class="stn-btn capping set-cap d-none" id="cap1">
                 Con tapón
               </button>
             </div>
@@ -196,8 +211,5 @@
         </div>
       </div>
     </div>
-
-
-  
   </body>
 </html>

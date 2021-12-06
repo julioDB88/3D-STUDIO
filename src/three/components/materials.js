@@ -31,7 +31,7 @@ const GlassMaterial = new MeshPhysicalMaterial({
 const AluminiumMaterial = new MeshStandardMaterial({
   metalness: 1,
   roughness: .2,
-
+  color: "rgb(103,112,94)",
   envMap: hdr
 });
 
@@ -42,8 +42,11 @@ const TableMaterial = new MeshStandardMaterial({
   emissive: 0.2,
   envMap: hdr
 })
+const PlasticMaterial  = new MeshStandardMaterial({
+  color: 'black',
+})
 
 
 
 
-module.exports = { GlassMaterial, AluminiumMaterial, TableMaterial };
+module.exports = { GlassMaterial, AluminiumMaterial, TableMaterial,PlasticMaterial };
