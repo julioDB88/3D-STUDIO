@@ -152,7 +152,7 @@ class Studio3d {
     let cap = await retrieveModel(this.currentCap.name)
     this.currentCap = cap;
     this.scene.add(cap)
-    // this.render()
+    this.render()
   }
 
   /**

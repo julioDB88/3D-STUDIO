@@ -16,6 +16,9 @@ $('.change-glass').on('click',function(){
 })
 $('.change-cap').on('click',function(){
     let model =$(this).attr('id');
+        if($('.remove-cap').hasClass('d-none')){
+            $('.capping').toggleClass('d-none')
+        }
 
     studio.changeCap(model)
 })
