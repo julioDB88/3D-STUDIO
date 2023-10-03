@@ -2,12 +2,8 @@ const {
   MeshStandardMaterial,
   MeshPhysicalMaterial,
   EquirectangularReflectionMapping,
-
 } = require("three");
 const { RGBELoader } = require("three/examples/jsm/loaders/RGBELoader");
-
-
-
 
 const hdrEquirect = new RGBELoader().load(
   "../textures/empty_warehouse_01_4k.hdr",
@@ -15,38 +11,37 @@ const hdrEquirect = new RGBELoader().load(
     hdrEquirect.mapping = EquirectangularReflectionMapping;
   }
 );
-const hdr = new RGBELoader().load('../textures/royal_esplanade_1k.hdr',
-  () => {
-    hdr.mapping = EquirectangularReflectionMapping;
-  }
-);
+const hdr = new RGBELoader().load("../textures/royal_esplanade_1k.hdr", () => {
+  hdr.mapping = EquirectangularReflectionMapping;
+});
 const GlassMaterial = new MeshPhysicalMaterial({
   transmission: 1,
   thickness: 1.5,
   roughness: 0.07,
-  envMap: hdrEquirect
-
-})
+  envMap: hdrEquirect,
+});
 
 const AluminiumMaterial = new MeshStandardMaterial({
   metalness: 1,
-  roughness: .2,
+  roughness: 0.2,
   color: "rgb(103,112,94)",
-  envMap: hdr
+  envMap: hdr,
 });
 
 const TableMaterial = new MeshStandardMaterial({
-  color: 'rgb(158,126,126)',
+  color: "rgb(158,126,126)",
   metalness: 1,
-  roughness: .2,
+  roughness: 0.2,
   emissive: 0.2,
-  envMap: hdr
-})
-const PlasticMaterial  = new MeshStandardMaterial({
-  color: 'black',
-})
+  envMap: hdr,
+});
+const PlasticMaterial = new MeshStandardMaterial({
+  color: "black",
+});
 
-
-
-
-module.exports = { GlassMaterial, AluminiumMaterial, TableMaterial,PlasticMaterial };
+module.exports = {
+  GlassMaterial,
+  AluminiumMaterial,
+  TableMaterial,
+  PlasticMaterial,
+};
