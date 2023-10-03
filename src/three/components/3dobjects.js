@@ -24,6 +24,7 @@ async function loadModels(model) {
    loader.loadAsync("../models/max.glb"),
    loader.loadAsync("../models/mesa.glb"),
    loader.loadAsync("../models/orris.glb"),
+   loader.loadAsync("../models/drone.glb"),
    loader.loadAsync("../models/orange.glb"),
    loader.loadAsync("../models/spray.glb"),
    loader.loadAsync("../models/tokyo.glb"),
@@ -35,7 +36,7 @@ async function loadModels(model) {
     allModels.push(setupModel(model))
   })
   
-
+console.log(allModels);
 
 }
 async function retrieveModel(modelName) {

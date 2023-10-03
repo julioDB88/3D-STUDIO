@@ -21,7 +21,7 @@
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
-    "@webpack-cli/generators": "^2.4.1",
+    "@webpack-cli/generators": "^3.0.7",
     "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.3",
     "html-webpack-plugin": "^5.5.0",
@@ -34,7 +34,6 @@
     "sass-loader": "^12.3.0",
     "terser-webpack-plugin": "^5.2.5",
     "uglify-js": "^3.14.4",
-    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.64.2",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.5.0",

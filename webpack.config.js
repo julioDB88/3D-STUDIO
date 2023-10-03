@@ -4,7 +4,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const isProduction = process.env.NODE_ENV == "production";
 
 const config = {
@@ -18,31 +18,29 @@ const config = {
   },
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      chunks: "all",
     },
   },
   plugins: [
-    
     new HtmlWebpackPlugin({
       template: "index.html",
     }),
-    
 
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
-    new UglifyJsPlugin({
-      minify(file, sourceMap) {
-        const extractedComments = [];
+    // new UglifyJsPlugin({
+    //   minify(file, sourceMap) {
+    //     const extractedComments = [];
 
-        // Custom logic for extract comments
+    //     // Custom logic for extract comments
 
-        const { error, map, code, warnings } = require('uglify-js') // Or require('./path/to/uglify-module')
-          .minify(file, {
-            /* Your options for minification */
-          });
+    //     const { error, map, code, warnings } = require('uglify-js') // Or require('./path/to/uglify-module')
+    //       .minify(file, {
+    //         /* Your options for minification */
+    //       });
 
-        return { error, map, code, warnings, extractedComments };
-    }})
+    //     return { error, map, code, warnings, extractedComments };
+    // }})
   ],
   module: {
     rules: [
@@ -52,7 +50,7 @@ const config = {
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [ "css-loader", "postcss-loader", "sass-loader"],
+        use: ["css-loader", "postcss-loader", "sass-loader"],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
@@ -61,17 +59,15 @@ const config = {
 
       {
         test: /\.(glb|gltf|obj|hdr)$/,
-        use:
-        [
-            {
-                loader: 'file-loader',
-                options:
-                {
-                    outputPath: 'assets/models/'
-                }
-            }
-        ]
-    },
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "assets/models/",
+            },
+          },
+        ],
+      },
     ],
   },
 };

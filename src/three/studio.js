@@ -27,6 +27,7 @@ import {
 import {
   locations
 } from "./components/locations";
+import { MeshBasicMaterial } from "three";
 
 
 
@@ -250,7 +251,6 @@ class Studio3d {
 
     await loadModels();
     await this.setModels();
-
 
 
     this.scene = await createScene();
